@@ -22,7 +22,7 @@ func partition(t []int, low, high int) int {
 			t[i], t[j] = t[j], t[i]
 		}
 	}
-	i++ // move index one position to the right, after the smallest then pivot
+	i++ // at "i" is element smaller then pivot, so we move i one positiopn to the right, to put pivot just after it 
 	t[i], t[high] = t[high], t[i]
 	return i
 }
