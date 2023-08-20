@@ -1,4 +1,4 @@
 # GoAlgoCrafting
 
-##list of algorithms
+## list of algorithms
 - quicksort
