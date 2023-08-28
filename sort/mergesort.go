@@ -17,27 +17,23 @@ func MergeSort(t []int) []int {
 }
 
 func merge(left, right []int) []int {
-	var result []int
+	totalLength := len(left) + len(right)
+	result := make([]int, 0, totalLength)
 	indexLeft := 0
 	indexRight := 0
 
-	//log.Printf("merge start. %v, %v\n", left, right)
 	for indexLeft < len(left) && indexRight < len(right) {
 		if left[indexLeft] <= right[indexRight] {
 			result = append(result, left[indexLeft])
-			indexLeft += 1
+			indexLeft++
 		} else {
 			result = append(result, right[indexRight])
-			indexRight += 1
+			indexRight++
 		}
 	}
-	//log.Printf("merge po pętli. %v, %v, %v\n", result,
-	//	left[indexLeft:],
-	//	right[indexRight:])
 	result = append(result, left[indexLeft:]...)
 	result = append(result, right[indexRight:]...)
 
-	//log.Printf("merged array. %v\n", result)
 	return result
 
 }
