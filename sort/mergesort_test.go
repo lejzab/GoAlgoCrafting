@@ -5,14 +5,18 @@ import (
 	"testing"
 )
 
-func TestQuickSort(t *testing.T) {
+func TestMergeSort(t *testing.T) {
 	tests := []struct {
 		name     string
 		input    []int
 		expected []int
 	}{
+		{name: "Simple sort",
+			input:    []int{7, 2, 1, 6, 8, 5, 3, 4},
+			expected: []int{1, 2, 3, 4, 5, 6, 7, 8},
+		},
 		{
-			name:     "Simple sort",
+			name:     "Double elements",
 			input:    []int{3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5},
 			expected: []int{1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9},
 		},
@@ -27,13 +31,12 @@ func TestQuickSort(t *testing.T) {
 			expected: []int{},
 		},
 		// Add more test cases here
-
 	}
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			QuickSort(test.input, 0, len(test.input)-1)
-			if !reflect.DeepEqual(test.input, test.expected) {
+			result := MergeSort(test.input)
+			if !reflect.DeepEqual(result, test.expected) {
 				t.Errorf("got %v, expected %v", test.input, test.expected)
 			}
 		})
