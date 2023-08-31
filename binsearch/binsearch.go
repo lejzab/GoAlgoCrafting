@@ -1,34 +1,31 @@
 package binsearch
 
-// BinSearch is a recursive binary search algorithm that searches for a target value
-// in a sorted integer array.
-// t: The sorted integer array.
-// lo: The lower index boundary of the search range.
-// hi: The upper index boundary of the search range.
+import "log"
+
+// BinSearch performs binary search on a sorted integer slice 't' to find the index
+// of the target value 'search'.
+// t: The sorted integer slice.
 // search: The target value to search for.
 // Returns the index of the target value if found, otherwise returns -1.
-func BinSearch(t []int, lo, hi int, search int) int {
-	// Calculate the middle index of the current search range.
-	m := (lo + hi) / 2
+func BinSearch(t []int, search int) int {
+	lo := 0      // Initialize the lower index boundary.
+	hi := len(t) // Initialize the upper index boundary.
 
-	// Base case: If the lower index is greater than or equal to the upper index,
-	// the search range is empty, and the target value is not found.
-	if lo >= hi {
-		return -1
+	for lo < hi {
+		m := (lo + hi) / 2 // Calculate the middle index of the current search range.
+
+		log.Printf("%v, lo=%d, hi=%d\n", t[lo:hi], lo, hi)
+		if search == t[m] {
+			return m // If the middle element is equal to the target value, return its index.
+		}
+		if search > t[m] {
+			lo = m + 1 // If the target value is greater than the middle element,
+			// narrow the search to the right half of the array.
+		} else {
+			hi = m // If the target value is smaller than or equal to the middle element,
+			// narrow the search to the left half of the array.
+		}
 	}
 
-	// If the middle element is equal to the target value, return its index.
-	if search == t[m] {
-		return m
-	}
-
-	// If the target value is smaller than the middle element,
-	// recursively search the left half of the array.
-	if search < t[m] {
-		return BinSearch(t, lo, m, search)
-	} else {
-		// If the target value is larger than or equal to the middle element,
-		// recursively search the right half of the array.
-		return BinSearch(t, m+1, hi, search)
-	}
+	return -1 // If the target value is not found in the array, return -1.
 }
